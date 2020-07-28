@@ -1,0 +1,175 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1757.77777777778,2112" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:c="clr-namespace:CloudWebAPI;assembly=CloudWebAPI" xmlns:d="clr-namespace:DSF_Lib_Orch;assembly=DSF_Lib_Orch" xmlns:du="clr-namespace:DSF_Lib_Orch.util;assembly=DSF_Lib_Orch" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="28">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Management.Automation</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>CloudOrchestratorAPI</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>CloudWebAPI</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="50">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Management.Automation</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>CloudOrchestratorAPI</AssemblyReference>
+      <AssemblyReference>CloudWebAPI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="697.333333333333,1947.11111111111" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Int32)" Name="folders" />
+      <Variable x:TypeArguments="x:Int32" Name="lastJobOlderThanDays" />
+      <Variable x:TypeArguments="x:String" Name="bearerToken" />
+      <Variable x:TypeArguments="x:String" Name="orchURL" />
+      <Variable x:TypeArguments="x:String" Name="tenantLogicalName" />
+      <Variable x:TypeArguments="x:String" Name="folderExceptionsStr" />
+      <Variable x:TypeArguments="scg1:HashSet(x:String)" Name="folderExceptions" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetAllDSFFolders workflow" sap:VirtualizedContainerService.HintSize="655.555555555556,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GetAllDSFFolders.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Int32)" x:Key="folders">[folders]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="FolderCleanup_LastJobOlderThanDays" DisplayName="Get Asset LastJobOlderThanDays" sap:VirtualizedContainerService.HintSize="655.555555555556,22.2222222222222" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="x:Int32">[lastJobOlderThanDays]</OutArgument>
+      </ui:GetRobotAsset.Value>
+    </ui:GetRobotAsset>
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="FolderCleanup_Exceptions" DisplayName="Get Asset Exceptions" sap:VirtualizedContainerService.HintSize="655.555555555556,22.2222222222222" sap2010:WorkflowViewState.IdRef="GetRobotAsset_2">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="x:String">[folderExceptionsStr]</OutArgument>
+      </ui:GetRobotAsset.Value>
+    </ui:GetRobotAsset>
+    <Assign DisplayName="Assign folder exceptions" sap:VirtualizedContainerService.HintSize="655.555555555556,60.4444444444444" sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg1:HashSet(x:String)">[folderExceptions]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg1:HashSet(x:String)">[new HashSet(Of String)(folderExceptionsStr.Split(","C))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <d:Orch_Login_Util IDToken="{x:Null}" AccessToken="[bearerToken]" sap:VirtualizedContainerService.HintSize="655.555555555556,22.2222222222222" sap2010:WorkflowViewState.IdRef="Orch_Login_Util_1" />
+    <d:GetOrchURL sap:VirtualizedContainerService.HintSize="655.555555555556,22.2222222222222" sap2010:WorkflowViewState.IdRef="GetOrchURL_1" OrchURL="[orchURL]" />
+    <du:GetTenantLogicalName sap:VirtualizedContainerService.HintSize="655.555555555556,22.2222222222222" sap2010:WorkflowViewState.IdRef="GetTenantLogicalName_1" TenantLogicalName="[tenantLogicalName]" />
+    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Int32)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="655.555555555556,1315.55555555556" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[folders]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Int32)">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Int32)" Name="item" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="620,1180" sap2010:WorkflowViewState.IdRef="Sequence_8">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="displayName" />
+              <Variable x:TypeArguments="x:Int64" Name="folderID" />
+              <Variable x:TypeArguments="c:JobDto" Name="job" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="578.222222222222,60.4444444444444" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[displayName]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[item.Key]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="578.222222222222,60.4444444444444" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Int64">[folderID]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int64">[item.Value]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="578.222222222222,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Folder &quot; &amp; displayName]" />
+            <If Condition="[folderExceptions.Contains(displayName)]" DisplayName="If is exception, don't delete" sap:VirtualizedContainerService.HintSize="578.222222222222,211.111111111111" sap2010:WorkflowViewState.IdRef="If_3">
+              <If.Then>
+                <ui:Continue sap:VirtualizedContainerService.HintSize="200,22.2222222222222" sap2010:WorkflowViewState.IdRef="Continue_3" />
+              </If.Then>
+            </If>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetLastExecution workflow" sap:VirtualizedContainerService.HintSize="578.222222222222,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GetLastExecution.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <OutArgument x:TypeArguments="c:JobDto" x:Key="job">[job]</OutArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="orchURL">[orchURL]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="bearerToken">[bearerToken]</InArgument>
+                <InArgument x:TypeArguments="x:Int32" x:Key="lastJobOlderThanDays">[lastJobOlderThanDays]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="tenantLogicalName">[tenantLogicalName]</InArgument>
+                <InArgument x:TypeArguments="x:Int64" x:Key="folderID">[folderID]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+            <If Condition="[(Now - job.StartTime.Value).Days &lt;= lastJobOlderThanDays]" DisplayName="If recent execution, don't delete" sap:VirtualizedContainerService.HintSize="578.222222222222,245.777777777778" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <ui:Continue sap:VirtualizedContainerService.HintSize="200,22.2222222222222" sap2010:WorkflowViewState.IdRef="Continue_2" />
+              </If.Then>
+              <If.Else>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.777777777778,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Time delta: &quot; &amp; (Now - job.StartTime.Value).Days.ToString]" />
+              </If.Else>
+            </If>
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke DeleteFolder workflow" sap:VirtualizedContainerService.HintSize="578.222222222222,87.5555555555556" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="DeleteFolder.xaml">
+              <ui:InvokeWorkflowFile.Arguments>
+                <InArgument x:TypeArguments="x:String" x:Key="orchURL">[orchURL]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="bearerToken">[bearerToken]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="tenantLogicalName">[tenantLogicalName]</InArgument>
+                <InArgument x:TypeArguments="x:Int64" x:Key="folderID">[folderID]</InArgument>
+              </ui:InvokeWorkflowFile.Arguments>
+            </ui:InvokeWorkflowFile>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+  </Sequence>
+</Activity>
